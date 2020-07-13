@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interect With DOM</title>
+    <style>
+        body{
+            margin: 80px 100px 80px 100px !important;
+            padding: 10px;
+            background-color: grey;
+            color: white !important;
+            font-size: 25px !important;
+            border: 2px black solid !important;
+            min-height: 600px ;
+        }
+        h1{
+            text-align: center;
+        }
+        button{
+            padding: 10px;
+            background-color: orange;
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js">
+    </script>
+    <h1>Conditionals And Lists</h1><hr>
+
+
+    <!--vue result -->
+    <div id="app" >
+        <p v-if="show">I will gone if you click the button</p>
+
+        <p v-else>I am here! Because of you clicked the button</p>
+
+        <p v-show="show">I don't even fucking care your button!</p>
+        <template v-if="show">
+            <h2>heading</h2>
+            <p>Inside a template tag!</p>
+        </template>
+
+        <button @click="show = !show">Switch</button>
+
+        <h3>For Loop and List</h3><hr>
+        <ul>
+            <li v-for="(item,index) in ingredients" :key="ingredient">{{ item }}({{ index }})</li>
+        </ul>
+        <input type="text" v-model="new_item"><button @click="ingredients.push(new_item)">Add New Item</button>
+
+
+        <template v-for="(item,index) in ingredients">
+            <h5>{{item}}</h5><span>{{ index }}</span>
+        </template>
+
+        <ol>
+            <li v-for="person in persons">
+                <h6 v-for="(value,key,itiration_number) in person">{{key }} : {{value}} ({{ itiration_number }})</h6>
+            </li>
+        </ol>
+
+        <ul>
+            <li v-for="n in 10">{{ n }}</li>
+        </ul>
+
+    </div>
+
+<!-- vue input -->
+<script>
+    new Vue({
+        el: '#app',
+        data:{
+            show:true,
+            ingredients: ['Meat','Fruits','Cookies'],
+            persons:[
+            {name:'Max',age:23,color:'Blue'},
+            {name:'Will',age:34,color:'Red'},
+            {name:'Dubb',age:44,color:'Green'}
+            ],
+            
+        }
+    });
+</script>
+</body>
+
+</html>

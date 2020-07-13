@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interect With DOM</title>
+    <style>
+        body{
+            margin: 80px 100px 80px 100px !important;
+            padding: 10px;
+            background-color: grey;
+            color: white !important;
+            font-size: 25px !important;
+            border: 2px black solid !important;
+            min-height: 600px ;
+        }
+        h1{
+            text-align: center;
+        }
+        button{
+            padding: 10px;
+            background-color: orange;
+        }
+        .demo{
+            height: 100px;
+            width: 100px;
+            display: inline-block;
+            background-color:#7FFFD4;
+            margin: 10px;
+        }
+        .DarkCyan{
+            background-color: #008B8B;
+        }
+        .crimson{
+            background-color: #DC143C;
+        }
+        .green{
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js">
+    </script>
+    <h1>Dynamically Change the CSS Property</h1><hr>
+
+
+    <!--vue result -->
+    <div id="app" >
+
+    <div class="demo" @click="attachDarkCyan = !attachDarkCyan" :class="divClasses"></div>
+
+    <div class="demo" :class="{ DarkCyan:attachDarkCyan }"></div>
+    <div class="demo" :class="color"></div>  
+
+    <div class="demo" :style="{backgroundColor:color}"></div>      
+    <hr>
+    <input type="text" v-model="color">
+    
+    </div>
+
+    
+
+
+<!-- vue input -->
+<script>
+    new Vue({
+        el: '#app',
+        data:{
+            attachDarkCyan: false,
+            color: 'red'
+        },
+        computed:{
+            divClasses:function(){
+                return{
+                    DarkCyan:this.attachDarkCyan,
+                    crimson: !this.attachDarkCyan
+                }
+            }
+        }   
+        
+    });
+</script>
+</body>
+
+</html>

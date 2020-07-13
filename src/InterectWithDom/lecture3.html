@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lecture 3,4</title>
+    <style>
+        body{
+            margin: 30px !important;
+            padding: 20px !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js">
+    </script>
+
+    <div id="app">
+        <input type="text" v-on:input="userDefinedMethod">
+        <p>{{ sayhello() }}</p>
+        <p>{{ passTitle () }}</p>
+        <p>Dynamic Url - <a v-bind:href="bind_data">Facebook</a></p>
+    </div>
+
+
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                bind_data: 'http://facebook.com',
+                passing_title: 'This text is comming from data section. and it return by a function using "this" keyword! '
+            },
+            methods: {
+                sayhello: function () {
+                    return 'We can return anything form the function also! this is comming from a function!'
+                },
+                passTitle:function(){
+                    return this.passing_title
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

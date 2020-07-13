@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interect With DOM</title>
+    <style>
+        body{
+            margin: 80px 100px 80px 100px !important;
+            padding: 10px;
+            background-color: grey !important;
+            color: white !important;
+            font-size: 25px !important;
+            border: 2px black solid !important;
+            min-height: 1200px ;
+        }
+        h1{
+            text-align: center;
+        }
+        button{
+            padding: 10px;
+            background-color: orange;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js">
+    </script>
+    <h1>Interect With DOM by Vue Js</h1>
+
+
+    <!--vue result -->
+    <div id="app" >
+        <!-- v-once -->
+        <p v-once >{{ title }}</p>
+        <p> {{ sayHello() }} </p>
+
+        <!-- binding attribute -->
+        <a v-bind:href="link">Google</a>
+        <br>
+        Write Somthing : <input type="text" v-model="name">
+        <p>{{ name }}</p>
+
+        <!-- output raw Html / v-html -->
+        <p v-html="finishedLink"></p>
+
+        <!-- event listener: v-on:enevt -->
+        <button v-on:click="increse(5, $event)">Increse 5</button>
+        <p>{{ counter }}</p>
+        <p v-on:mousemove="updateCoordinates">Coordinates : {{x}} / {{y}} 
+            -<span v-on:mousemove="dummy">STOP UPDATING Coordinates in this area!</span></p>
+
+        <p v-on:mousemove="updateCoordinates">Coordinates : {{x}} / {{y}} 
+            -<span v-on:mousemove.stop="">STOP UPDATING Coordinates in this area!</span></p> <!-- Here .stop is a event modifier -->
+        <input type="" v-on:keyup.enter ="alertMe">
+        <br>
+
+
+
+        <!-- Reactivity -->
+        <h4>Reactivity</h4><hr>
+        <button v-on:click="counter2++">Inrease</button>
+        <button v-on:click="counter2--">Decrese</button>
+        <button v-on:click="anotherCounter++">Increse Another</button>
+
+        <p>Counter2 : {{ counter2 }}</p>
+        <p>Another Counter : {{ anotherCounter }}</p>
+        <p>{{ result() }} | {{ output }}</p>
+        
+
+
+
+
+        <!-- we Can Replace v-on with @ , v-on == @
+    and  v-bind:href == :href -->
+
+        <button @click="changeLink">Click to change the link2</button> 
+        <button v-on:click="changeLink">Click to change the link2</button>
+
+        <a v-bind:href="link2">Link</a>
+        <a :href="link2">Link</a>
+
+    </div>
+
+    
+    
+
+
+
+
+
+
+<!-- vue input -->
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+           title:'Hello world!',
+           link:'http://google.com',
+           finishedLink : '<a href="http://google.com">Google</a>',
+           counter:0,
+           x:0,
+           y:0,
+           name: 'Mohammad Faisal'   ,
+           counter2 : 0,
+           counter3 : 0,
+           anotherCounter:0,
+           link2: 'http://facebook.com'        
+
+        },
+
+        computed: {
+            output: function(){
+                return this.counter2 > 5 ? 'Greater than 5':'Less than 5'
+            }
+        },
+
+        watch :{
+            counter2 : function(){
+                var v = this;
+                setTimeout(function(){
+                    v.counter2 = 0;
+                },2000)
+            }
+        },
+
+        methods: {
+            sayHello:function(){ 
+                this.title = 'Hello'
+                return this.title; },
+            increse:function(args, enevt){
+                this.counter += args;
+            },
+            updateCoordinates:function(event){
+                this.x = event.clientX;
+                this.y = event.clientY;
+            },
+            dummy:function(event){
+                event.stopPropagation();
+            },
+            alertMe:function(){
+                alert('Alert')
+            },
+            result: function(){
+                return this.counter2 > 5 ? 'Greater than 5':'Less than 5'
+            },
+            changeLink:function(){
+                this.link2 = 'http://youtube.com'
+            }
+
+        }
+    });
+</script>
+
+</body>
+
+</html>

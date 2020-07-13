@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lession 2</title>
+</head>
+
+<body>
+
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js">
+    </script>
+
+    <div id="app">
+        <input type="text" v-on:input="userDefinedMethod">
+        <p>{{ passing_data }}</p>
+    </div>
+
+
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                passing_data: 'Bismillah! '
+            },
+            methods: {
+                userDefinedMethod: function(params){
+                    this.passing_data = params.target.value;
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

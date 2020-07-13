@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <title>The Monstar Slayer</title>
+    <link rel="stylesheet" type="text/css" href="first_projects.css">
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.js">
+    </script>
+</head>
+
+<body>
+
+<div class="ui container wrapper" >
+    <div class="ui stackable grid" id="app">
+        <div class="centered row" v-if="!gameIsRunning">
+            <button class="ui green button" id="start-game" @click="startGame">START NEW GAME</button>
+        </div>
+
+        <div class="row" v-else>
+            <div class="column">
+                <div class="ui segment">
+                    <div class="four ui stackable buttons">
+                      <button class="ui orange button" id="attact" @click="attack">ATTACK</button>
+                      <button class="ui red button" id="sattact" @click="sattack">SPECIAL ATTACK</button>
+                      <button class="ui green button" id="heal" @click="heal">HEAL UP</button>
+                      <button class="ui yellow button" id="gup" @click="gup">GIVE UP</button>
+                    </div>
+                </div>
+            </div>        
+        </div>
+
+
+
+
+        <div class="row one">
+            <div class="eight wide column">
+                <div class="ui header">Your Health</div>
+                    <div class="healthbar">
+                        <div class="healthbar text-center"
+                         style="background-color: green; margin: 0; color: white; text-align: center;"
+                         :style="{width:playerHealth + '%'}"
+                         >
+                            {{ playerHealth }}
+                        </div>
+                    </div>
+                </div>
+            <div class="eight wide column">
+                <div class="ui header">Monster's Health</div>
+                    <div class="healthbar">
+                        <div class="healthbar text-center" 
+                        style="background-color: green; margin: 0; color: white; text-align: center;"
+                        :style="{width:monsterHealth + '%'}"
+                        >
+                            {{ monsterHealth }}
+                        </div>
+                    </div>
+            </div>
+        </div>
+        
+
+
+        <div class="row">
+            <div class="column">
+                <div class="ui segment" v-if="turns.length > 0 ">
+                    <section class="row log">
+                        <div class="small-12 columns">
+                            <ul>
+                                <li v-for="(turn,index) in turns"
+                                :class="{'player-turn': turn.isPlayer, 'monster-turn': !turn.isPlayer }"
+                                >
+                                {{  index }} : {{ turn.text }}
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+                 </div>
+            </div>
+        </div>  
+    </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<script type="text/javascript" src="first_projects.js"></script>
+</body>
+
+</html>
